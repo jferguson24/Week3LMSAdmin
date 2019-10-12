@@ -1,35 +1,23 @@
 package com.ss.lms.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "tbl_book_loans")
-public class BookLoan implements Serializable
+public class BookLoanCompositeKey implements Serializable
 {
-	private static final long serialVersionUID = -3570078113098465234L;
-	
-	@Id
+	private static final long serialVersionUID = 6330584754225219104L;
+
 	private Integer bookId;
 	private Integer branchId;
 	private Integer cardNo;
-	private Date dateOut;
-	private Date dueDate;
 
-	public BookLoan() {}
-	
-	public BookLoan(Integer bookId, Integer branchId, Integer cardNo, Date dateOut, Date dueDate)
+	public BookLoanCompositeKey(){}
+
+	public BookLoanCompositeKey(Integer bookId, Integer branchId, Integer cardNo)
 	{
+		super();
 		this.bookId = bookId;
 		this.branchId = branchId;
 		this.cardNo = cardNo;
-		this.dateOut = dateOut;
-		this.dueDate = dueDate;
 	}
 
 	@Override
@@ -40,8 +28,6 @@ public class BookLoan implements Serializable
 		result = prime * result + ((bookId == null) ? 0 : bookId.hashCode());
 		result = prime * result + ((branchId == null) ? 0 : branchId.hashCode());
 		result = prime * result + ((cardNo == null) ? 0 : cardNo.hashCode());
-		result = prime * result + ((dateOut == null) ? 0 : dateOut.hashCode());
-		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
 		return result;
 	}
 
@@ -54,7 +40,7 @@ public class BookLoan implements Serializable
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BookLoan other = (BookLoan) obj;
+		BookLoanCompositeKey other = (BookLoanCompositeKey) obj;
 		if (bookId == null)
 		{
 			if (other.bookId != null)
@@ -73,26 +59,13 @@ public class BookLoan implements Serializable
 				return false;
 		} else if (!cardNo.equals(other.cardNo))
 			return false;
-		if (dateOut == null)
-		{
-			if (other.dateOut != null)
-				return false;
-		} else if (!dateOut.equals(other.dateOut))
-			return false;
-		if (dueDate == null)
-		{
-			if (other.dueDate != null)
-				return false;
-		} else if (!dueDate.equals(other.dueDate))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "BookLoan [bookId=" + bookId + ", branchId=" + branchId + ", cardNo=" + cardNo + ", dateOut=" + dateOut
-				+ ", dueDate=" + dueDate + "]";
+		return "BookLoanCompositeKey [bookId=" + bookId + ", branchId=" + branchId + ", cardNo=" + cardNo + "]";
 	}
 
 	public Integer getBookId()
@@ -123,25 +96,5 @@ public class BookLoan implements Serializable
 	public void setCardNo(Integer cardNo)
 	{
 		this.cardNo = cardNo;
-	}
-
-	public Date getDateOut()
-	{
-		return dateOut;
-	}
-
-	public void setDateOut(Date dateOut)
-	{
-		this.dateOut = dateOut;
-	}
-
-	public Date getDueDate()
-	{
-		return dueDate;
-	}
-
-	public void setDueDate(Date dueDate)
-	{
-		this.dueDate = dueDate;
 	}
 }

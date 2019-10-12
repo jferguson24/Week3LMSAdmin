@@ -3,16 +3,56 @@ package com.ss.lms.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity 
+@Table(name = "tbl_author")
 public class Author implements Serializable
 {
 	private static final long serialVersionUID = 3002288345129007776L;
 
+	@Id
 	private Integer authorId;
 	private String authorName;
 
-	public Author()
-	{
+	public Author(){}
 
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((authorId == null) ? 0 : authorId.hashCode());
+		result = prime * result + ((authorName == null) ? 0 : authorName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Author other = (Author) obj;
+		if (authorId == null)
+		{
+			if (other.authorId != null)
+				return false;
+		} else if (!authorId.equals(other.authorId))
+			return false;
+		if (authorName == null)
+		{
+			if (other.authorName != null)
+				return false;
+		} else if (!authorName.equals(other.authorName))
+			return false;
+		return true;
 	}
 
 	public Author(Integer authorId, String authorName)
@@ -24,7 +64,7 @@ public class Author implements Serializable
 	@Override
 	public String toString()
 	{
-		return authorId + "\t" + authorName;
+		return "Author [authorId=" + authorId + ", authorName=" + authorName + "]";
 	}
 
 	/**
