@@ -1,84 +1,97 @@
 package com.ss.lms.entity;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	
 	private Integer bookId;
 	private String title;
 	private Author author;
 	private Publisher publisher;
-	
-	public Book(Integer bookId, String title, Author author, Publisher publisher) {
+
+	public Book(Integer bookId, String title, Author author, Publisher publisher)
+	{
 		this.bookId = bookId;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
 	}
-	
+
 	@Override
-	public String toString() 
+	public String toString()
 	{
-		return  bookId + "\t" + title + "\t" + author.getAuthorName() + "\t" + publisher.getPublisherName();
+		return bookId + "\t" + title + "\t" + author.getAuthorName() + "\t" + publisher.getPublisherName();
 	}
-	
 
 	/**
 	 * @return the bookId
 	 */
-	public Integer getBookId() {
+	public Integer getBookId()
+	{
 		return bookId;
 	}
 
 	/**
 	 * @param bookId the bookId to set
 	 */
-	public void setBookId(Integer bookId) {
+	public void setBookId(Integer bookId)
+	{
 		this.bookId = bookId;
 	}
 
 	/**
 	 * @return the title
 	 */
-	public String getTitle() {
+	public String getTitle()
+	{
 		return title;
 	}
 
 	/**
 	 * @param title the title to set
 	 */
-	public void setTitle(String title) {
+	public void setTitle(String title)
+	{
 		this.title = title;
 	}
 
 	/**
 	 * @return the authorId
 	 */
-	public Author getAuthor() {
+	public Author getAuthor()
+	{
 		return author;
 	}
 
 	/**
 	 * @param authorId the authorId to set
 	 */
-	public void setAuthor(Author author) {
-		this.author= author;
+	public void setAuthor(Author author)
+	{
+		this.author = author;
 	}
-	
+
 	/**
 	 * @return the publisher
 	 */
-	public Publisher getPublisher() {
+	public Publisher getPublisher()
+	{
 		return publisher;
 	}
 
 	/**
 	 * @param publisher the publisher to set
 	 */
-	public void setPublisher(Publisher publisher) {
+	public void setPublisher(Publisher publisher)
+	{
 		this.publisher = publisher;
 	}
 
-	public Book() {
-		
+	public Book()
+	{
+
 	}
-	
+
 }

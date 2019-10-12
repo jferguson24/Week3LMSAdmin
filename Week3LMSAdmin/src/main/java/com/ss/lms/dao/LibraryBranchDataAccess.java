@@ -6,8 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 import com.ss.lms.entity.LibraryBranch;
 
+@Component
 public class LibraryBranchDataAccess extends DataAccess<LibraryBranch>
 {
 	public LibraryBranchDataAccess() throws SQLException, ClassNotFoundException

@@ -5,12 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 import com.ss.lms.entity.Author;
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookCopy;
 import com.ss.lms.entity.LibraryBranch;
 import com.ss.lms.entity.Publisher;
 
+@Component
 public class BookCopyDataAccess extends DataAccess<BookCopy>
 {
 	public BookCopyDataAccess() throws SQLException, ClassNotFoundException

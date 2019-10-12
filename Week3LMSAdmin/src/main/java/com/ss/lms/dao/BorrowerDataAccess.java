@@ -6,8 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 import com.ss.lms.entity.Borrower;
 
+@Component
 public class BorrowerDataAccess extends DataAccess<Borrower>
 {
 	public BorrowerDataAccess() throws SQLException, ClassNotFoundException

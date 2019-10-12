@@ -1,12 +1,14 @@
 package com.ss.lms.dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public abstract class DataAccess<T>
+
+public abstract class DataAccess<T extends Serializable>
 {
 	Connection con;
 

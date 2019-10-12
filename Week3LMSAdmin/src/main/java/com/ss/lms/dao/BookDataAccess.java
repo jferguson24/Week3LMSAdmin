@@ -9,14 +9,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 import com.ss.lms.entity.Author;
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Publisher;
 
-/**
- * @author sj
- *
- */
+
+@Component
 public class BookDataAccess extends DataAccess<Book>
 {
 	public BookDataAccess() throws SQLException, ClassNotFoundException

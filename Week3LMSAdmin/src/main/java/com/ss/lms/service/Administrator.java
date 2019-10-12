@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.ss.lms.dao.AuthorDataAccess;
 import com.ss.lms.dao.BookDataAccess;
 import com.ss.lms.dao.BookLoanDataAccess;
@@ -18,26 +21,33 @@ import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.LibraryBranch;
 import com.ss.lms.entity.Publisher;
 
+@Component
 public class Administrator implements ServiceAdmin
 {
+	@Autowired
 	private DataAccess<Author> authorDao;
+	@Autowired
 	private DataAccess<Publisher> publisherDao;
+	@Autowired
 	private DataAccess<Book> bookDao;
+	@Autowired
 	private DataAccess<LibraryBranch> libraryBranchDao;
+	@Autowired
 	private DataAccess<Borrower> borrowerDao;
+	@Autowired
 	private DataAccess<BookLoan> bookLoanDao;
 	
-	public Administrator(
-			AuthorDataAccess authorDao, PublisherDataAccess publisherDao, BookDataAccess bookDao,
-			LibraryBranchDataAccess libraryBranchDao, BorrowerDataAccess borrowerDao, BookLoanDataAccess bookLoanDao) 
-	{
-		this.authorDao = authorDao;
-		this.publisherDao = publisherDao;
-		this.bookDao = bookDao;
-		this.libraryBranchDao = libraryBranchDao;
-		this.borrowerDao = borrowerDao;
-		this.bookLoanDao = bookLoanDao;
-	}
+//	public Administrator(
+//			AuthorDataAccess authorDao, PublisherDataAccess publisherDao, BookDataAccess bookDao,
+//			LibraryBranchDataAccess libraryBranchDao, BorrowerDataAccess borrowerDao, BookLoanDataAccess bookLoanDao) 
+//	{
+//		this.authorDao = authorDao;
+//		this.publisherDao = publisherDao;
+//		this.bookDao = bookDao;
+//		this.libraryBranchDao = libraryBranchDao;
+//		this.borrowerDao = borrowerDao;
+//		this.bookLoanDao = bookLoanDao;
+//	}
 	
 	public void closeConnection() 
 	{

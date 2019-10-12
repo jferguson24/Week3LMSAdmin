@@ -6,8 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 import com.ss.lms.entity.Publisher;
 
+@Component
 public class PublisherDataAccess extends DataAccess<Publisher>
 {
 	public PublisherDataAccess() throws SQLException, ClassNotFoundException
