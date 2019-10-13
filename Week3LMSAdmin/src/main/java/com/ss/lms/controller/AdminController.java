@@ -107,6 +107,7 @@ public class AdminController
 	@GetMapping(value = "/book", produces = "application/json")
 	public ResponseEntity<Iterable<Book>> readBookAll()
 	{
+		// TODO
 		return new ResponseEntity<>(admin.readBookAll(), HttpStatus.OK);
 	}
 	
