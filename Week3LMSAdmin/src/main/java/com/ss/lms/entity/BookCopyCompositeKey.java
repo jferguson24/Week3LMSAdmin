@@ -2,11 +2,13 @@ package com.ss.lms.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.IdClass;
+
 public class BookCopyCompositeKey implements Serializable
 {
 	private static final long serialVersionUID = 7453106781264031549L;
 	
-	private Integer bookid;
+	private Integer bookId;
 	private Integer branchId;
 	
 	public BookCopyCompositeKey() {}
@@ -14,7 +16,7 @@ public class BookCopyCompositeKey implements Serializable
 	public BookCopyCompositeKey(Integer bookid, Integer branchId)
 	{
 		super();
-		this.bookid = bookid;
+		this.bookId = bookid;
 		this.branchId = branchId;
 	}
 	
@@ -23,7 +25,7 @@ public class BookCopyCompositeKey implements Serializable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bookid == null) ? 0 : bookid.hashCode());
+		result = prime * result + ((bookId == null) ? 0 : bookId.hashCode());
 		result = prime * result + ((branchId == null) ? 0 : branchId.hashCode());
 		return result;
 	}
@@ -37,11 +39,11 @@ public class BookCopyCompositeKey implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		BookCopyCompositeKey other = (BookCopyCompositeKey) obj;
-		if (bookid == null)
+		if (bookId == null)
 		{
-			if (other.bookid != null)
+			if (other.bookId != null)
 				return false;
-		} else if (!bookid.equals(other.bookid))
+		} else if (!bookId.equals(other.bookId))
 			return false;
 		if (branchId == null)
 		{
@@ -55,15 +57,16 @@ public class BookCopyCompositeKey implements Serializable
 	@Override
 	public String toString()
 	{
-		return "BookCopyCompositeKey [bookid=" + bookid + ", branchId=" + branchId + "]";
+		return "BookCopyCompositeKey [bookid=" + bookId + ", branchId=" + branchId + "]";
 	}
+	
 	public Integer getBookid()
 	{
-		return bookid;
+		return bookId;
 	}
 	public void setBookid(Integer bookid)
 	{
-		this.bookid = bookid;
+		this.bookId = bookid;
 	}
 	public Integer getBranchId()
 	{

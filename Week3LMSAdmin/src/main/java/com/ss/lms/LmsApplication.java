@@ -7,8 +7,8 @@ public class LmsApplication
 {
 	public static void main(String[] args) 
 	{
+		System.out.println("Hello my World!");
 		SpringApplication.run(LmsApplication.class, args);
-		System.out.println("Hello World!");
 	}
 	// TODO content negotiation
 }

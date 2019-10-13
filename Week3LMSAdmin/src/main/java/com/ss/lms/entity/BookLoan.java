@@ -5,11 +5,13 @@ import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_book_loans")
+@IdClass(BookLoanCompositeKey.class)
 public class BookLoan implements Serializable
 {
 	private static final long serialVersionUID = -3570078113098465234L;

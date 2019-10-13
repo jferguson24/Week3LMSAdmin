@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_book_copies")
+@IdClass(BookCopyCompositeKey.class)
 public class BookCopy implements Serializable
 {
 	private static final long serialVersionUID = -7441409147455698231L;

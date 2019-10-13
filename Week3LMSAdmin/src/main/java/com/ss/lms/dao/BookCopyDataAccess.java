@@ -9,5 +9,5 @@ import com.ss.lms.entity.BookCopyCompositeKey;
 @Component
 public interface BookCopyDataAccess extends CrudRepository<BookCopy, BookCopyCompositeKey>
 {
-
+	
 }

@@ -9,13 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name = "tbl_author")
+@Table(name = "tbl_author", schema = "library")
 public class Author implements Serializable
 {
 	private static final long serialVersionUID = 3002288345129007776L;
 
 	@Id
+	@Column(name = "authorId")
 	private Integer authorId;
+	@Column(name = "authorName")
 	private String authorName;
 
 	public Author(){}

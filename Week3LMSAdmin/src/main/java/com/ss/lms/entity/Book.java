@@ -16,8 +16,8 @@ public class Book implements Serializable
 	@Id
 	private Integer bookId;
 	private String title;
-	private Integer authorId;
-	private Integer publisherId;
+	private Integer authId; // AHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+	private Integer pubId; // AHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 
 	public Book() {}
 	
@@ -25,8 +25,8 @@ public class Book implements Serializable
 	{
 		this.bookId = bookId;
 		this.title = title;
-		this.authorId = authorId;
-		this.publisherId = publisherId;
+		this.authId = authorId;
+		this.pubId = publisherId;
 	}
 
 	@Override
@@ -34,9 +34,9 @@ public class Book implements Serializable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((authorId == null) ? 0 : authorId.hashCode());
+		result = prime * result + ((authId == null) ? 0 : authId.hashCode());
 		result = prime * result + ((bookId == null) ? 0 : bookId.hashCode());
-		result = prime * result + ((publisherId == null) ? 0 : publisherId.hashCode());
+		result = prime * result + ((pubId == null) ? 0 : pubId.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -57,13 +57,13 @@ public class Book implements Serializable
 			return false;
 		}
 		Book other = (Book) obj;
-		if (authorId == null)
+		if (authId == null)
 		{
-			if (other.authorId != null)
+			if (other.authId != null)
 			{
 				return false;
 			}
-		} else if (!authorId.equals(other.authorId))
+		} else if (!authId.equals(other.authId))
 		{
 			return false;
 		}
@@ -77,13 +77,13 @@ public class Book implements Serializable
 		{
 			return false;
 		}
-		if (publisherId == null)
+		if (pubId == null)
 		{
-			if (other.publisherId != null)
+			if (other.pubId != null)
 			{
 				return false;
 			}
-		} else if (!publisherId.equals(other.publisherId))
+		} else if (!pubId.equals(other.pubId))
 		{
 			return false;
 		}
@@ -103,7 +103,7 @@ public class Book implements Serializable
 	@Override
 	public String toString()
 	{
-		return "Book [bookId=" + bookId + ", title=" + title + ", authorId=" + authorId + ", publisherId=" + publisherId
+		return "Book [bookId=" + bookId + ", title=" + title + ", authorId=" + authId + ", publisherId=" + pubId
 				+ "]";
 	}
 
@@ -129,22 +129,22 @@ public class Book implements Serializable
 
 	public Integer getAuthorId()
 	{
-		return authorId;
+		return authId;
 	}
 
 	public void setAuthorId(Integer authorId)
 	{
-		this.authorId = authorId;
+		this.authId = authorId;
 	}
 
 	public Integer getPublisherId()
 	{
-		return publisherId;
+		return pubId;
 	}
 
 	public void setPublisherId(Integer publisherId)
 	{
-		this.publisherId = publisherId;
+		this.pubId = publisherId;
 	}
 	
 	
