@@ -94,6 +94,7 @@ public class AdminController
 	@GetMapping(value = "/publisher", produces = "application/json")
 	public ResponseEntity<Iterable<Publisher>> readPublisherAll()
 	{
+		// TODO
 		return new ResponseEntity<>(admin.readPublisherAll(), HttpStatus.OK);
 	}
 
