@@ -3,7 +3,10 @@ package com.ss.lms.entity;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
@@ -18,7 +21,9 @@ public class BookLoan implements Serializable
 	
 	@Id
 	private Integer bookId;
+	@Id
 	private Integer branchId;
+	@Id
 	private Integer cardNo;
 	private Date dateOut;
 	private Date dueDate;

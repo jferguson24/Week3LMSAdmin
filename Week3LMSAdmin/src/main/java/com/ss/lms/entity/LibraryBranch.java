@@ -2,7 +2,10 @@ package com.ss.lms.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,12 +16,20 @@ public class LibraryBranch implements Serializable
 	private static final long serialVersionUID = -4420193844042055034L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(updatable = false)
 	private Integer branchId;
 	private String branchName;
 	private String branchAddress;
 
 	public LibraryBranch(){}
 
+	public LibraryBranch(String branchName, String branchAddress)
+	{
+		this.branchName = branchName;
+		this.branchAddress = branchAddress;
+	}
+	
 	public LibraryBranch(Integer branchId, String branchName, String branchAddress)
 	{
 		this.branchId = branchId;

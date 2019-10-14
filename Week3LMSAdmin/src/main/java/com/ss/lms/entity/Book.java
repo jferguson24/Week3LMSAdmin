@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,12 +16,21 @@ public class Book implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(updatable = false)
 	private Integer bookId;
 	private String title;
 	private Integer authId; // AHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 	private Integer pubId; // AHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 
 	public Book() {}
+
+	public Book(String title, Integer authorId, Integer publisherId)
+	{
+		this.title = title;
+		this.authId = authorId;
+		this.pubId = publisherId;
+	}
 	
 	public Book(Integer bookId, String title, Integer authorId, Integer publisherId)
 	{

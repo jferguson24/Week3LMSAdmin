@@ -2,7 +2,10 @@ package com.ss.lms.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,15 +16,22 @@ public class Publisher implements Serializable
 	private static final long serialVersionUID = -3607759577307213492L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(updatable = false)
 	private Integer publisherId;
 	private String publisherName;
 	private String publisherAddress;
 	private String publisherPhone;
 
-	public Publisher()
-	{
-	}
+	public Publisher(){}
 
+	public Publisher(String publisherName, String publisherAddress, String publisherPhone)
+	{
+		this.publisherName = publisherName;
+		this.publisherAddress = publisherAddress;
+		this.publisherPhone = publisherPhone;
+	}
+	
 	public Publisher(Integer publisherId, String publisherName, String publisherAddress, String publisherPhone)
 	{
 		this.publisherId = publisherId;

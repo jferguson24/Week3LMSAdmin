@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,13 +17,25 @@ public class Author implements Serializable
 	private static final long serialVersionUID = 3002288345129007776L;
 
 	@Id
-	@Column(name = "authorId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(updatable = false)
 	private Integer authorId;
-	@Column(name = "authorName")
 	private String authorName;
 
 	public Author(){}
 
+
+	public Author(String authorName)
+	{
+		this.authorName = authorName;
+	}
+	
+	public Author(Integer authorId, String authorName)
+	{
+		this.authorId = authorId;
+		this.authorName = authorName;
+	}
+	
 	@Override
 	public int hashCode()
 	{
@@ -55,12 +69,6 @@ public class Author implements Serializable
 		} else if (!authorName.equals(other.authorName))
 			return false;
 		return true;
-	}
-
-	public Author(Integer authorId, String authorName)
-	{
-		this.authorId = authorId;
-		this.authorName = authorName;
 	}
 
 	@Override
