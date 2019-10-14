@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,6 @@ public class AdminController
 {
 	@Autowired
 	AdminService admin;
-
 	
 	/*************************************************
 	 * 
@@ -87,7 +87,7 @@ public class AdminController
 		}
 		
 		// create the entity
-		return new ResponseEntity<Book>(admin.createBook(book), HttpStatus.CREATED);
+		return new ResponseEntity<Book>(admin.saveBook(book), HttpStatus.CREATED);
 	}
 	
 	@PostMapping(path = "/branch", produces = "application/json", consumes="application/json")
@@ -288,22 +288,12 @@ public class AdminController
 	@GetMapping(value = "/loan/borrower/{cardNo}/branch/{branchId}/book/{bookId}", produces = "application/json")
 	public ResponseEntity<BookLoan> readBookLoanByAllId(@PathVariable("cardNo") Integer cardNo, @PathVariable("branchId") Integer branchId, @PathVariable("bookId") Integer bookId)
 	{
-		if(cardNo == null || branchId == null || bookId == null) 
-		{
-			return new ResponseEntity<BookLoan>(HttpStatus.BAD_REQUEST);
-		}
-		
-		BookLoanCompositeKey sentData = new BookLoanCompositeKey();
-		sentData.setCardNo(cardNo);
-		sentData.setBranchId(branchId);
-		sentData.setBookId(bookId);
-		
-		Optional<BookLoan> result = admin.readBookLoanById(sentData);
+		Optional<BookLoan> result = admin.readBookLoanById(new BookLoanCompositeKey(cardNo,branchId,bookId));
 		
 		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<BookLoan>(HttpStatus.OK);
+			return new ResponseEntity<BookLoan>(HttpStatus.NOT_FOUND);
 		}
 		else
 		{
@@ -333,6 +323,138 @@ public class AdminController
 	 * 
 	 *************************************************/
 	
+	@PutMapping(value = "/author/{authorId}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Author> updateAuthor(@PathVariable Integer authorId, @RequestBody Author author)
+	{
+		if(author.getAuthorId() != null || author.getAuthorName() == null || "".contentEquals(author.getAuthorName())) 
+		{
+			return new ResponseEntity<Author>(HttpStatus.BAD_REQUEST);
+		}
+		
+		if(!admin.readAuthorById(authorId).isPresent()) 
+		{
+			return new ResponseEntity<Author>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Author>(admin.saveAuthor(author), HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/publisher/{publisherId}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Publisher> updatePublisher(@PathVariable Integer publisherId, @RequestBody Publisher publisher)
+	{
+		if(publisher.getPublisherId() != null || publisher.getPublisherName() == null || "".contentEquals(publisher.getPublisherName())
+				|| publisher.getPublisherAddress() == null || "".contentEquals(publisher.getPublisherAddress())
+				|| publisher.getPublisherPhone() == null || "".contentEquals(publisher.getPublisherPhone())) 
+		{
+			return new ResponseEntity<Publisher>(HttpStatus.BAD_REQUEST);
+		}
+		
+		if(!admin.readPublisherById(publisherId).isPresent()) 
+		{
+			return new ResponseEntity<Publisher>(HttpStatus.NOT_FOUND);
+		}
+		
+		publisher.setPublisherId(publisherId);
+
+		return new ResponseEntity<Publisher>(admin.savePublisher(publisher), HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/book/{bookId}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Book> updateBook(@PathVariable Integer bookId, @RequestBody Book book)
+	{
+		if(book.getBookId() != null || book.getTitle() == null || "".contentEquals(book.getTitle())
+				|| book.getAuthorId() == null || book.getPublisherId() == null)
+		{
+			return new ResponseEntity<Book>(HttpStatus.BAD_REQUEST);
+		}
+		
+		// check the entity exists
+		if(!admin.readBookById(bookId).isPresent())
+		{
+			return new ResponseEntity<Book>(HttpStatus.NOT_FOUND);
+		}
+		
+		// check new author exists
+		if(!admin.readAuthorById(book.getAuthorId()).isPresent()) 
+		{
+			return new ResponseEntity<Book>(HttpStatus.UNPROCESSABLE_ENTITY);
+		}
+		
+		// check new publisher exists
+		if(!admin.readPublisherById(book.getPublisherId()).isPresent())
+		{
+			return new ResponseEntity<Book>(HttpStatus.UNPROCESSABLE_ENTITY);
+		}
+		
+		book.setBookId(bookId);
+		
+		return new ResponseEntity<Book>(admin.saveBook(book), HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/branch/{branchId}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable Integer branchId, @RequestBody LibraryBranch libraryBranch)
+	{
+		if(libraryBranch.getBranchId() != null || libraryBranch.getBranchName() == null || "".contentEquals(libraryBranch.getBranchName())
+				|| libraryBranch.getBranchAddress() == null || "".contentEquals(libraryBranch.getBranchAddress()))
+		{
+			return new ResponseEntity<LibraryBranch>(HttpStatus.BAD_REQUEST);
+		}
+		
+		if(!admin.readLibraryBranchById(branchId).isPresent()) 
+		{
+			return new ResponseEntity<LibraryBranch>(HttpStatus.NOT_FOUND);
+		}
+		
+		libraryBranch.setBranchId(branchId);
+
+		return new ResponseEntity<LibraryBranch>(admin.saveLibraryBranch(libraryBranch), HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/borrower/{cardNo}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Borrower> updateBorrower(@PathVariable Integer cardNo, @RequestBody Borrower borrower)
+	{
+		if(borrower.getCardNo() != null || borrower.getName() == null || "".contentEquals(borrower.getName())
+				|| borrower.getAddress() == null || "".contentEquals(borrower.getAddress())
+				|| borrower.getPhone() == null || "".contentEquals(borrower.getPhone()))
+		{
+			return new ResponseEntity<Borrower>(HttpStatus.BAD_REQUEST);
+		}
+		
+		if(!admin.readBorrowerById(cardNo).isPresent()) 
+		{
+			return new ResponseEntity<Borrower>(HttpStatus.NOT_FOUND);
+		}
+		
+		borrower.setCardNo(cardNo);
+
+		return new ResponseEntity<Borrower>(admin.saveBorrower(borrower), HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/loan/borrower/{cardNo}/branch/{branchId}/book/{bookId}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<BookLoan> updateBookLoan(@PathVariable("cardNo") Integer cardNo, @PathVariable("branchId") Integer branchId, @PathVariable("bookId") Integer bookId, @RequestBody BookLoan bookLoan)
+	{
+		// all IDs must be null in the body, and then assigned from the URI
+		// dateOut must also be null, and is to be filled in using the existing data in the DB
+		if(bookLoan.getCardNo() != null || bookLoan.getBranchId() != null || bookLoan.getBookId() != null || bookLoan.getDateOut() != null) 
+		{
+			return new ResponseEntity<BookLoan>(HttpStatus.BAD_REQUEST);
+		}
+		
+		// once each ID exists, we need to check that entry exists and we need to retrieve the existing dateOut data
+		Optional<BookLoan> existingData = admin.readBookLoanById(new BookLoanCompositeKey(cardNo,branchId,bookId));
+		
+		if(!existingData.isPresent()) 
+		{
+			return new ResponseEntity<BookLoan>(HttpStatus.NOT_FOUND);
+		}
+		
+		bookLoan.setCardNo(cardNo);
+		bookLoan.setBranchId(branchId);
+		bookLoan.setBookId(bookId);
+		bookLoan.setDateOut(existingData.get().getDateOut());
+
+		return new ResponseEntity<BookLoan>(admin.saveBookLoan(bookLoan), HttpStatus.OK);
+	}
 	
 	/*************************************************
 	 * 
