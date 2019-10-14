@@ -101,7 +101,7 @@ public class AdminController
 		}
 		
 		// create the entity
-		return new ResponseEntity<LibraryBranch>(admin.saveLibraryBranch(libraryBranch), HttpStatus.OK);
+		return new ResponseEntity<LibraryBranch>(admin.saveLibraryBranch(libraryBranch), HttpStatus.CREATED);
 	}
 	
 	@PostMapping(path = "/borrower", produces = "application/json", consumes="application/json")
@@ -128,20 +128,14 @@ public class AdminController
 	@GetMapping(value = "/author/{authorId}", produces = "application/json")
 	public ResponseEntity<Author> readAuthorById(@PathVariable Integer authorId)
 	{
-		// this is covered by redAuthorAll, consider removing?
-		if(authorId == null) // if the user sent empty values, 400
-		{
-			return new ResponseEntity<Author>(HttpStatus.BAD_REQUEST);
-		}
-		
 		Optional<Author> result = admin.readAuthorById(authorId);
 		
-		// if there is no entry for the entity, 404
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<Author>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Author>(HttpStatus.OK);
 		}
-		else // if we found an entity, 200
+		else
 		{
 			return new ResponseEntity<Author>(result.get(), HttpStatus.OK);
 		}
@@ -151,13 +145,13 @@ public class AdminController
 	public ResponseEntity<Iterable<Author>> readAuthorAll()
 	{
 		Iterable<Author> result = admin.readAuthorAll();
-		
-		// if there isnt even one entity, 404
+
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
 		if(!result.iterator().hasNext()) 
 		{
-			return new ResponseEntity<Iterable<Author>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Iterable<Author>>(HttpStatus.OK);
 		}
-		else // if we found an enitity, 200
+		else
 		{
 			return new ResponseEntity<Iterable<Author>>(result, HttpStatus.OK);
 		}
@@ -166,76 +160,171 @@ public class AdminController
 	@GetMapping(value = "/publisher/{publisherId}", produces = "application/json")
 	public ResponseEntity<Publisher> readPublisherById(@PathVariable Integer publisherId)
 	{
-		// TODO
-		return new ResponseEntity<Publisher>(admin.readPublisherById(publisherId).get(), HttpStatus.OK);
+		Optional<Publisher> result = admin.readPublisherById(publisherId);
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.isPresent()) 
+		{
+			return new ResponseEntity<Publisher>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Publisher>(result.get(), HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping(value = "/publisher", produces = "application/json")
 	public ResponseEntity<Iterable<Publisher>> readPublisherAll()
 	{
-		// TODO
-		return new ResponseEntity<Iterable<Publisher>>(admin.readPublisherAll(), HttpStatus.OK);
+		Iterable<Publisher> result = admin.readPublisherAll();
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.iterator().hasNext()) 
+		{
+			return new ResponseEntity<Iterable<Publisher>>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Iterable<Publisher>>(result, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping(value = "/book/{bookId}", produces = "application/json")
 	public ResponseEntity<Book> readBookById(@PathVariable Integer bookId)
 	{
-		// TODO
-		return new ResponseEntity<Book>(admin.readBookById(bookId).get(), HttpStatus.OK);
+		Optional<Book> result = admin.readBookById(bookId);
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.isPresent()) 
+		{
+			return new ResponseEntity<Book>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Book>(result.get(), HttpStatus.OK);
+		}
 	}
 
 	@GetMapping(value = "/book", produces = "application/json")
 	public ResponseEntity<Iterable<Book>> readBookAll()
 	{
-		// TODO
-		return new ResponseEntity<Iterable<Book>>(admin.readBookAll(), HttpStatus.OK);
+		Iterable<Book> result = admin.readBookAll();
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.iterator().hasNext()) 
+		{
+			return new ResponseEntity<Iterable<Book>>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Iterable<Book>>(result, HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping(value = "/branch/{branchId}", produces = "application/json")
 	public ResponseEntity<LibraryBranch> readLibraryBranchById(@PathVariable Integer branchId)
 	{
-		// TODO
-		return new ResponseEntity<LibraryBranch>(admin.readLibraryBranchById(branchId).get(), HttpStatus.OK);
+		Optional<LibraryBranch> result = admin.readLibraryBranchById(branchId);
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.isPresent()) 
+		{
+			return new ResponseEntity<LibraryBranch>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<LibraryBranch>(result.get(), HttpStatus.OK);
+		}
 	}
 
 	@GetMapping(value = "/branch", produces = "application/json")
 	public ResponseEntity<Iterable<LibraryBranch>> readLibraryBranchAll()
 	{
-		// TODO
-		return new ResponseEntity<Iterable<LibraryBranch>>(admin.readLibraryBranchAll(), HttpStatus.OK);
+		Iterable<LibraryBranch> result = admin.readLibraryBranchAll();
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.iterator().hasNext()) 
+		{
+			return new ResponseEntity<Iterable<LibraryBranch>>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Iterable<LibraryBranch>>(result, HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping(value = "/borrower/{cardNo}", produces = "application/json")
 	public ResponseEntity<Borrower> readBorrowerById(@PathVariable Integer cardNo)
 	{
-		// TODO
-		return new ResponseEntity<Borrower>(admin.readBorrowerById(cardNo).get(),HttpStatus.OK);
+		Optional<Borrower> result = admin.readBorrowerById(cardNo);
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.isPresent()) 
+		{
+			return new ResponseEntity<Borrower>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Borrower>(result.get(), HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping(value = "/borrower", produces = "application/json")
 	public ResponseEntity<Iterable<Borrower>> readBorrowerByAll()
 	{
-		// TODO
-		return new ResponseEntity<Iterable<Borrower>>(admin.readBorrowerAll(), HttpStatus.OK);
+		Iterable<Borrower> result = admin.readBorrowerAll();
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.iterator().hasNext()) 
+		{
+			return new ResponseEntity<Iterable<Borrower>>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Iterable<Borrower>>(result, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping(value = "/loan/borrower/{cardNo}/branch/{branchId}/book/{bookId}", produces = "application/json")
 	public ResponseEntity<BookLoan> readBookLoanByAllId(@PathVariable("cardNo") Integer cardNo, @PathVariable("branchId") Integer branchId, @PathVariable("bookId") Integer bookId)
 	{
-		// TODO
+		if(cardNo == null || branchId == null || bookId == null) 
+		{
+			return new ResponseEntity<BookLoan>(HttpStatus.BAD_REQUEST);
+		}
+		
 		BookLoanCompositeKey sentData = new BookLoanCompositeKey();
 		sentData.setCardNo(cardNo);
 		sentData.setBranchId(branchId);
 		sentData.setBookId(bookId);
 		
-		return new ResponseEntity<BookLoan>(admin.readBookLoanById(sentData).get(), HttpStatus.OK);
+		Optional<BookLoan> result = admin.readBookLoanById(sentData);
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.isPresent()) 
+		{
+			return new ResponseEntity<BookLoan>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<BookLoan>(result.get(), HttpStatus.OK);
+		}
 	}
 
 	@GetMapping(value = "/loan", produces = "application/json")
 	public ResponseEntity<Iterable<BookLoan>> readBookLoanAll()
 	{
-		// TODO
-		return new ResponseEntity<Iterable<BookLoan>>(admin.readBookLoanAll(), HttpStatus.OK);
+		Iterable<BookLoan> result = admin.readBookLoanAll();
+		
+		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
+		if(!result.iterator().hasNext()) 
+		{
+			return new ResponseEntity<Iterable<BookLoan>>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Iterable<BookLoan>>(result, HttpStatus.OK);
+		}
 	}
 	
 	/*************************************************
