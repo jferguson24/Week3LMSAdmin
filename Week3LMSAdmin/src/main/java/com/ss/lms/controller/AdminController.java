@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.ss.lms.entity.Author;
 import com.ss.lms.entity.Book;
@@ -22,7 +24,6 @@ import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.LibraryBranch;
 import com.ss.lms.entity.Publisher;
 import com.ss.lms.service.AdminService;
-
 
 @RestController
 @RequestMapping(value = "/lms/admin*")
@@ -37,7 +38,8 @@ public class AdminController
 	 * 
 	 *************************************************/
 
-	@PostMapping(path = "/author", produces = "application/json", consumes="application/json")
+	@PostMapping(path = "/author", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+								consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Author> createAuthor(@RequestBody Author author) 
 	{
 		// make sure the id is null and other fields aren't
@@ -50,7 +52,8 @@ public class AdminController
 		return new ResponseEntity<Author>(admin.saveAuthor(author), HttpStatus.CREATED);
 	}
 
-	@PostMapping(path = "/publisher", produces = "application/json", consumes="application/json")
+	@PostMapping(path = "/publisher", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+								consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Publisher> createPublisher(@RequestBody Publisher publisher) 
 	{
 		// make sure the id is null, and the other fields aren't
@@ -64,7 +67,8 @@ public class AdminController
 		return new ResponseEntity<Publisher>(admin.savePublisher(publisher), HttpStatus.CREATED);
 	}
 	
-	@PostMapping(path = "/book", produces = "application/json", consumes="application/json")
+	@PostMapping(path = "/book", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
+							consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Book> createBook(@RequestBody Book book)
 	{
 		// make sure the id is null, and the other fields aren't
@@ -90,7 +94,8 @@ public class AdminController
 		return new ResponseEntity<Book>(admin.saveBook(book), HttpStatus.CREATED);
 	}
 	
-	@PostMapping(path = "/branch", produces = "application/json", consumes="application/json")
+	@PostMapping(path = "/branch", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+								consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<LibraryBranch> createLibraryBranch(@RequestBody LibraryBranch libraryBranch)
 	{
 		// make sure the id is null, and the other fields aren't
@@ -104,7 +109,8 @@ public class AdminController
 		return new ResponseEntity<LibraryBranch>(admin.saveLibraryBranch(libraryBranch), HttpStatus.CREATED);
 	}
 	
-	@PostMapping(path = "/borrower", produces = "application/json", consumes="application/json")
+	@PostMapping(path = "/borrower", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
+								consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower)
 	{
 		// make sure the id is null, and the other fields aren't
@@ -125,7 +131,7 @@ public class AdminController
 	 * 
 	 *************************************************/
 
-	@GetMapping(value = "/author/{authorId}", produces = "application/json")
+	@GetMapping(value = "/author/{authorId}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Author> readAuthorById(@PathVariable Integer authorId)
 	{
 		Optional<Author> result = admin.readAuthorById(authorId);
@@ -141,7 +147,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping(value = "/author", produces = "application/json")
+	@GetMapping(value = "/author", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Iterable<Author>> readAuthorAll()
 	{
 		Iterable<Author> result = admin.readAuthorAll();
@@ -157,7 +163,7 @@ public class AdminController
 		}
 	}
 
-	@GetMapping(value = "/publisher/{publisherId}", produces = "application/json")
+	@GetMapping(value = "/publisher/{publisherId}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Publisher> readPublisherById(@PathVariable Integer publisherId)
 	{
 		Optional<Publisher> result = admin.readPublisherById(publisherId);
@@ -173,7 +179,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping(value = "/publisher", produces = "application/json")
+	@GetMapping(value = "/publisher", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Iterable<Publisher>> readPublisherAll()
 	{
 		Iterable<Publisher> result = admin.readPublisherAll();
@@ -189,7 +195,7 @@ public class AdminController
 		}
 	}
 
-	@GetMapping(value = "/book/{bookId}", produces = "application/json")
+	@GetMapping(value = "/book/{bookId}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Book> readBookById(@PathVariable Integer bookId)
 	{
 		Optional<Book> result = admin.readBookById(bookId);
@@ -205,7 +211,7 @@ public class AdminController
 		}
 	}
 
-	@GetMapping(value = "/book", produces = "application/json")
+	@GetMapping(value = "/book", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Iterable<Book>> readBookAll()
 	{
 		Iterable<Book> result = admin.readBookAll();
@@ -221,7 +227,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping(value = "/branch/{branchId}", produces = "application/json")
+	@GetMapping(value = "/branch/{branchId}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<LibraryBranch> readLibraryBranchById(@PathVariable Integer branchId)
 	{
 		Optional<LibraryBranch> result = admin.readLibraryBranchById(branchId);
@@ -237,7 +243,7 @@ public class AdminController
 		}
 	}
 
-	@GetMapping(value = "/branch", produces = "application/json")
+	@GetMapping(value = "/branch", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Iterable<LibraryBranch>> readLibraryBranchAll()
 	{
 		Iterable<LibraryBranch> result = admin.readLibraryBranchAll();
@@ -253,7 +259,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping(value = "/borrower/{cardNo}", produces = "application/json")
+	@GetMapping(value = "/borrower/{cardNo}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Borrower> readBorrowerById(@PathVariable Integer cardNo)
 	{
 		Optional<Borrower> result = admin.readBorrowerById(cardNo);
@@ -269,7 +275,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping(value = "/borrower", produces = "application/json")
+	@GetMapping(value = "/borrower", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Iterable<Borrower>> readBorrowerByAll()
 	{
 		Iterable<Borrower> result = admin.readBorrowerAll();
@@ -285,7 +291,8 @@ public class AdminController
 		}
 	}
 
-	@GetMapping(value = "/loan/borrower/{cardNo}/branch/{branchId}/book/{bookId}", produces = "application/json")
+	@GetMapping(value = "/loan/borrower/{cardNo}/branch/{branchId}/book/{bookId}", 
+				produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<BookLoan> readBookLoanByAllId(@PathVariable("cardNo") Integer cardNo, @PathVariable("branchId") Integer branchId, @PathVariable("bookId") Integer bookId)
 	{
 		Optional<BookLoan> result = admin.readBookLoanById(new BookLoanCompositeKey(cardNo,branchId,bookId));
@@ -301,7 +308,7 @@ public class AdminController
 		}
 	}
 
-	@GetMapping(value = "/loan", produces = "application/json")
+	@GetMapping(value = "/loan", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Iterable<BookLoan>> readBookLoanAll()
 	{
 		Iterable<BookLoan> result = admin.readBookLoanAll();
@@ -323,7 +330,8 @@ public class AdminController
 	 * 
 	 *************************************************/
 	
-	@PutMapping(value = "/author/{authorId}", consumes = "application/json", produces = "application/json")
+	@PutMapping(value = "/author/{authorId}", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+										produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Author> updateAuthor(@PathVariable Integer authorId, @RequestBody Author author)
 	{
 		if(author.getAuthorId() != null || author.getAuthorName() == null || "".contentEquals(author.getAuthorName())) 
@@ -339,7 +347,8 @@ public class AdminController
 		return new ResponseEntity<Author>(admin.saveAuthor(author), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/publisher/{publisherId}", consumes = "application/json", produces = "application/json")
+	@PutMapping(value = "/publisher/{publisherId}",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+											consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Publisher> updatePublisher(@PathVariable Integer publisherId, @RequestBody Publisher publisher)
 	{
 		if(publisher.getPublisherId() != null || publisher.getPublisherName() == null || "".contentEquals(publisher.getPublisherName())
@@ -359,7 +368,8 @@ public class AdminController
 		return new ResponseEntity<Publisher>(admin.savePublisher(publisher), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/book/{bookId}", consumes = "application/json", produces = "application/json")
+	@PutMapping(value = "/book/{bookId}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+									consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Book> updateBook(@PathVariable Integer bookId, @RequestBody Book book)
 	{
 		if(book.getBookId() != null || book.getTitle() == null || "".contentEquals(book.getTitle())
@@ -391,7 +401,8 @@ public class AdminController
 		return new ResponseEntity<Book>(admin.saveBook(book), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/branch/{branchId}", consumes = "application/json", produces = "application/json")
+	@PutMapping(value = "/branch/{branchId}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+										consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable Integer branchId, @RequestBody LibraryBranch libraryBranch)
 	{
 		if(libraryBranch.getBranchId() != null || libraryBranch.getBranchName() == null || "".contentEquals(libraryBranch.getBranchName())
@@ -410,7 +421,8 @@ public class AdminController
 		return new ResponseEntity<LibraryBranch>(admin.saveLibraryBranch(libraryBranch), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/borrower/{cardNo}", consumes = "application/json", produces = "application/json")
+	@PutMapping(value = "/borrower/{cardNo}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+									consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Borrower> updateBorrower(@PathVariable Integer cardNo, @RequestBody Borrower borrower)
 	{
 		if(borrower.getCardNo() != null || borrower.getName() == null || "".contentEquals(borrower.getName())
@@ -430,7 +442,9 @@ public class AdminController
 		return new ResponseEntity<Borrower>(admin.saveBorrower(borrower), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/loan/borrower/{cardNo}/branch/{branchId}/book/{bookId}", consumes = "application/json", produces = "application/json")
+	@PutMapping(value = "/loan/borrower/{cardNo}/branch/{branchId}/book/{bookId}", 
+			produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, 
+			consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<BookLoan> updateBookLoan(@PathVariable("cardNo") Integer cardNo, @PathVariable("branchId") Integer branchId, @PathVariable("bookId") Integer bookId, @RequestBody BookLoan bookLoan)
 	{
 		// all IDs must be null in the body, and then assigned from the URI
