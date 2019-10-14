@@ -50,7 +50,7 @@ public class AdminService
 	{
 		return publisherDao.save(publisher);
 	}
-	public Book createBook(Book book)
+	public Book saveBook(Book book)
 	{
 		return bookDao.save(book);
 	}
@@ -65,12 +65,10 @@ public class AdminService
 		return borrowerDao.save(borrower);
 	}
 	
-	// TODO
-//	public void saveBookLoan(BookLoan bookLoan) 
-//	{
-//		return borrowerDao.save(bookLoan);
-//	}
-
+	public BookLoan saveBookLoan(BookLoan bookLoan) 
+	{
+		return bookLoanDao.save(bookLoan);
+	}
 
 	/*************************************************
 	 * 

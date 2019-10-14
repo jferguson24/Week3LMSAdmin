@@ -23,12 +23,6 @@ public class LibraryBranch implements Serializable
 	private String branchAddress;
 
 	public LibraryBranch(){}
-
-	public LibraryBranch(String branchName, String branchAddress)
-	{
-		this.branchName = branchName;
-		this.branchAddress = branchAddress;
-	}
 	
 	public LibraryBranch(Integer branchId, String branchName, String branchAddress)
 	{

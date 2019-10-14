@@ -2,6 +2,7 @@ package com.ss.lms.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,12 +26,12 @@ public class BookLoan implements Serializable
 	private Integer branchId;
 	@Id
 	private Integer cardNo;
-	private Date dateOut;
-	private Date dueDate;
+	private Timestamp dateOut;
+	private Timestamp dueDate;
 
 	public BookLoan() {}
 	
-	public BookLoan(Integer bookId, Integer branchId, Integer cardNo, Date dateOut, Date dueDate)
+	public BookLoan(Integer bookId, Integer branchId, Integer cardNo, Timestamp dateOut, Timestamp dueDate)
 	{
 		this.bookId = bookId;
 		this.branchId = branchId;
@@ -132,22 +133,22 @@ public class BookLoan implements Serializable
 		this.cardNo = cardNo;
 	}
 
-	public Date getDateOut()
+	public Timestamp getDateOut()
 	{
 		return dateOut;
 	}
 
-	public void setDateOut(Date dateOut)
+	public void setDateOut(Timestamp dateOut)
 	{
 		this.dateOut = dateOut;
 	}
 
-	public Date getDueDate()
+	public Timestamp getDueDate()
 	{
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate)
+	public void setDueDate(Timestamp dueDate)
 	{
 		this.dueDate = dueDate;
 	}

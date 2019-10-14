@@ -14,7 +14,7 @@ public class BookLoanCompositeKey implements Serializable
 
 	public BookLoanCompositeKey(){}
 
-	public BookLoanCompositeKey(Integer bookId, Integer branchId, Integer cardNo)
+	public BookLoanCompositeKey(Integer cardNo, Integer branchId, Integer bookId)
 	{
 		super();
 		this.bookId = bookId;
