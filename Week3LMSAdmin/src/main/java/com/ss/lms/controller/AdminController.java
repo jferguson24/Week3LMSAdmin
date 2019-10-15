@@ -42,7 +42,6 @@ public class AdminController
 	public ResponseEntity<Author> createAuthor(@RequestBody Author author) 
 	{
 		// make sure the id is null and other fields aren't
-		// remember kids, always check for null values before checking the content of the value...
 		if(author.getAuthorId() != null || author.getAuthorName() == null || "".contentEquals(author.getAuthorName()) ) 
 		{
 			return new ResponseEntity<Author>(new Author(), HttpStatus.BAD_REQUEST);
