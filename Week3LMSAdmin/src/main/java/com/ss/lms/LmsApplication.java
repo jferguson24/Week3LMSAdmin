@@ -10,5 +10,4 @@ public class LmsApplication
 		System.out.println("Hello my World!");
 		SpringApplication.run(LmsApplication.class, args);
 	}
-	// TODO content negotiation
 }
