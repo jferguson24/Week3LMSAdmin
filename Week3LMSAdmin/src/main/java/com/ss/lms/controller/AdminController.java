@@ -44,7 +44,7 @@ public class AdminController
 		// make sure the id is null and other fields aren't
 		if(author.getAuthorId() != null || author.getAuthorName() == null || "".contentEquals(author.getAuthorName()) ) 
 		{
-			return new ResponseEntity<Author>(new Author(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Author>(HttpStatus.BAD_REQUEST);
 		}
 		
 		return new ResponseEntity<Author>(admin.saveAuthor(author), HttpStatus.CREATED);
@@ -59,7 +59,7 @@ public class AdminController
 											|| publisher.getPublisherAddress() == null || "".contentEquals(publisher.getPublisherAddress())
 											|| publisher.getPublisherPhone() == null || "".contentEquals(publisher.getPublisherPhone())) 
 		{
-			return new ResponseEntity<Publisher>(new Publisher(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Publisher>(HttpStatus.BAD_REQUEST);
 		}
 		
 		return new ResponseEntity<Publisher>(admin.savePublisher(publisher), HttpStatus.CREATED);
@@ -73,19 +73,19 @@ public class AdminController
 		if(book.getBookId() != null || book.getTitle() == null || "".contentEquals(book.getTitle())
 									|| book.getAuthorId() == null || book.getPublisherId() == null)
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Book>(HttpStatus.BAD_REQUEST);
 		}
 		
 		// check author exists
 		if(!admin.readAuthorById(book.getAuthorId()).isPresent()) 
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.UNPROCESSABLE_ENTITY);
+			return new ResponseEntity<Book>(HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
 		// check publisher exists
 		if(!admin.readPublisherById(book.getPublisherId()).isPresent())
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.UNPROCESSABLE_ENTITY);
+			return new ResponseEntity<Book>(HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
 		// create the entity
@@ -100,7 +100,7 @@ public class AdminController
 		if(libraryBranch.getBranchId() != null || libraryBranch.getBranchName() == null || "".contentEquals(libraryBranch.getBranchName())
 									|| libraryBranch.getBranchAddress() == null || "".contentEquals(libraryBranch.getBranchAddress()))
 		{
-			return new ResponseEntity<LibraryBranch>(new LibraryBranch(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<LibraryBranch>(HttpStatus.BAD_REQUEST);
 		}
 		
 		// create the entity
@@ -116,7 +116,7 @@ public class AdminController
 										|| borrower.getAddress() == null || "".contentEquals(borrower.getAddress())
 										|| borrower.getPhone() == null || "".contentEquals(borrower.getPhone()))
 		{
-			return new ResponseEntity<Borrower>(new Borrower(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Borrower>(HttpStatus.BAD_REQUEST);
 		}
 		
 		// create the entity
@@ -137,7 +137,7 @@ public class AdminController
 		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<Author>(new Author(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Author>(HttpStatus.NOT_FOUND);
 		}
 		else
 		{
@@ -153,7 +153,7 @@ public class AdminController
 		// 200 regardless of if we found it or not, the query was successful, it means they can keep doing it
 		if(!result.iterator().hasNext()) 
 		{
-			return new ResponseEntity<Iterable<Author>>(result, HttpStatus.OK);
+			return new ResponseEntity<Iterable<Author>>(HttpStatus.OK);
 		}
 		else
 		{
@@ -168,7 +168,7 @@ public class AdminController
 		
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<Publisher>(new Publisher(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Publisher>(HttpStatus.NOT_FOUND);
 		}
 		else
 		{
@@ -199,7 +199,7 @@ public class AdminController
 		
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Book>(HttpStatus.NOT_FOUND);
 		}
 		else
 		{
@@ -230,7 +230,7 @@ public class AdminController
 		
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<LibraryBranch>(new LibraryBranch(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<LibraryBranch>(HttpStatus.NOT_FOUND);
 		}
 		else
 		{
@@ -261,7 +261,7 @@ public class AdminController
 		
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<Borrower>(new Borrower(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Borrower>(HttpStatus.NOT_FOUND);
 		}
 		else
 		{
@@ -293,7 +293,7 @@ public class AdminController
 		
 		if(!result.isPresent()) 
 		{
-			return new ResponseEntity<BookLoan>(new BookLoan(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<BookLoan>(HttpStatus.NOT_FOUND);
 		}
 		else
 		{
@@ -330,12 +330,12 @@ public class AdminController
 		if(author.getAuthorId() != null || author.getAuthorName() == null || "".contentEquals(author.getAuthorName())) 
 		{
 			System.out.println("i made it to the null check !");
-			return new ResponseEntity<Author>(new Author(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Author>(HttpStatus.BAD_REQUEST);
 		}
 		
 		if(!admin.readAuthorById(authorId).isPresent()) 
 		{
-			return new ResponseEntity<Author>(new Author(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Author>(HttpStatus.NOT_FOUND);
 		}
 		
 		author.setAuthorId(authorId);
@@ -351,12 +351,12 @@ public class AdminController
 				|| publisher.getPublisherAddress() == null || "".contentEquals(publisher.getPublisherAddress())
 				|| publisher.getPublisherPhone() == null || "".contentEquals(publisher.getPublisherPhone())) 
 		{
-			return new ResponseEntity<Publisher>(new Publisher(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Publisher>(HttpStatus.BAD_REQUEST);
 		}
 		
 		if(!admin.readPublisherById(publisherId).isPresent()) 
 		{
-			return new ResponseEntity<Publisher>(new Publisher(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Publisher>(HttpStatus.NOT_FOUND);
 		}
 		
 		publisher.setPublisherId(publisherId);
@@ -371,25 +371,25 @@ public class AdminController
 		if(book.getBookId() != null || book.getTitle() == null || "".contentEquals(book.getTitle())
 				|| book.getAuthorId() == null || book.getPublisherId() == null)
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Book>(HttpStatus.BAD_REQUEST);
 		}
 		
 		// check the entity exists
 		if(!admin.readBookById(bookId).isPresent())
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Book>(HttpStatus.NOT_FOUND);
 		}
 		
 		// check new author exists
 		if(!admin.readAuthorById(book.getAuthorId()).isPresent()) 
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.UNPROCESSABLE_ENTITY);
+			return new ResponseEntity<Book>(HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
 		// check new publisher exists
 		if(!admin.readPublisherById(book.getPublisherId()).isPresent())
 		{
-			return new ResponseEntity<Book>(new Book(), HttpStatus.UNPROCESSABLE_ENTITY);
+			return new ResponseEntity<Book>(HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
 		book.setBookId(bookId);
@@ -404,12 +404,12 @@ public class AdminController
 		if(libraryBranch.getBranchId() != null || libraryBranch.getBranchName() == null || "".contentEquals(libraryBranch.getBranchName())
 				|| libraryBranch.getBranchAddress() == null || "".contentEquals(libraryBranch.getBranchAddress()))
 		{
-			return new ResponseEntity<LibraryBranch>(new LibraryBranch(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<LibraryBranch>(HttpStatus.BAD_REQUEST);
 		}
 		
 		if(!admin.readLibraryBranchById(branchId).isPresent()) 
 		{
-			return new ResponseEntity<LibraryBranch>(new LibraryBranch(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<LibraryBranch>(HttpStatus.NOT_FOUND);
 		}
 		
 		libraryBranch.setBranchId(branchId);
@@ -425,12 +425,12 @@ public class AdminController
 				|| borrower.getAddress() == null || "".contentEquals(borrower.getAddress())
 				|| borrower.getPhone() == null || "".contentEquals(borrower.getPhone()))
 		{
-			return new ResponseEntity<Borrower>(new Borrower(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Borrower>(HttpStatus.BAD_REQUEST);
 		}
 		
 		if(!admin.readBorrowerById(cardNo).isPresent()) 
 		{
-			return new ResponseEntity<Borrower>(new Borrower(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Borrower>(HttpStatus.NOT_FOUND);
 		}
 		
 		borrower.setCardNo(cardNo);
@@ -447,7 +447,7 @@ public class AdminController
 		// dateOut must also be null, and is to be filled in using the existing data in the DB
 		if(bookLoan.getCardNo() != null || bookLoan.getBranchId() != null || bookLoan.getBookId() != null || bookLoan.getDateOut() != null) 
 		{
-			return new ResponseEntity<BookLoan>(new BookLoan(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<BookLoan>(HttpStatus.BAD_REQUEST);
 		}
 		
 		// once each ID exists, we need to check that entry exists and we need to retrieve the existing dateOut data
@@ -455,7 +455,7 @@ public class AdminController
 		
 		if(!existingData.isPresent()) 
 		{
-			return new ResponseEntity<BookLoan>(new BookLoan(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<BookLoan>(HttpStatus.NOT_FOUND);
 		}
 		
 		bookLoan.setCardNo(cardNo);
